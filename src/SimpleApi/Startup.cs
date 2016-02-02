@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Owin;
 
-namespace ProjectAPI
+namespace SimpleApi
 {
     public class Startup
     {

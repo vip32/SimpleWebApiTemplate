@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
-using ProjectAPI;
+using SimpleApi;
 
-namespace ConsoleHostProject
+namespace SimpleApiConsoleHost
 {
     class Program
     {

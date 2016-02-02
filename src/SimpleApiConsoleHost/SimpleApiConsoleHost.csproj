@@ -7,8 +7,8 @@
     <ProjectGuid>{B3430A76-D5EA-4EA9-A834-0B2ABA6CAACD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleHostProject</RootNamespace>
-    <AssemblyName>ConsoleHostProject</AssemblyName>
+    <RootNamespace>SimpleApiConsoleHost</RootNamespace>
+    <AssemblyName>SimpleApiConsoleHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
