@@ -10,7 +10,7 @@ namespace ProjectAPI.Controllers
         {
             return new ResponseMessageResult(new HttpResponseMessage
             {
-                Content = new StringContent("Welcome to my API!")
+                Content = new StringContent("Welcome to my WebApi")
             });
         }
     }
