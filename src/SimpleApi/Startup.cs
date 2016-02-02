@@ -16,6 +16,19 @@ namespace ProjectAPI
                 routeTemplate: "{controller}",
                 defaults: new { controller = "Home" }
             );
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
 
             app.UseWebApi(config);
         }
