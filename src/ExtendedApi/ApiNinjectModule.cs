@@ -1,5 +1,6 @@
 ﻿using ExtendedApi.Providers;
 using Ninject.Modules;
+using Serilog;
 
 namespace ExtendedApi
 {
