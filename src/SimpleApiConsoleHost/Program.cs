@@ -8,8 +8,10 @@ namespace SimpleApiConsoleHost
     {
         static void Main(string[] args)
         {
-            using (WebApp.Start<Startup>("http://localhost:12345"))
+            const string uri = "http://localhost:12345";
+            using (WebApp.Start<Startup>(uri))
             {
+                Console.WriteLine(uri);
                 Console.ReadLine();
             }
         }
