@@ -18,13 +18,12 @@ namespace ExtendedApi
 
             app.UseNinjectMiddleware(CreateKernel)
                 .UseNinjectWebApi(config);
-            //app.UseWebApi(config);
         }
 
         private static StandardKernel CreateKernel()
         {
             var kernel = new StandardKernel();
-            kernel.Load(new ApiNinjectModule()); // Assembly.GetExecutingAssembly()
+            kernel.Load(Assembly.GetExecutingAssembly());
             return kernel;
         }
     }
