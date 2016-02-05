@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{896ABD3E-2F08-422D-9A6F-8D500F1C5D54}</ProjectGuid>
+    <ProjectGuid>{2008AD1F-7434-4BAB-B37B-5CE39A7F5449}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleApiWebHost</RootNamespace>
-    <AssemblyName>SimpleApiWebHost</AssemblyName>
+    <RootNamespace>ExtendedApiWebHost</RootNamespace>
+    <AssemblyName>ExtendedApiWebHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -85,11 +85,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\SimpleApi\SimpleApi.csproj">
-      <Project>{88d3368b-de07-4443-93e3-ee23c8497cdb}</Project>
-      <Name>SimpleApi</Name>
+    <ProjectReference Include="..\ExtendedApi\ExtendedApi.csproj">
+      <Project>{8062edf8-e116-49e7-adf4-b107ff3be483}</Project>
+      <Name>ExtendedApi</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

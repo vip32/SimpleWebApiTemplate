@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Results;
 
-namespace SimpleApi.Controllers
+namespace ExtendedApi.Controllers
 {
     public class HomeController : ApiController
     {
