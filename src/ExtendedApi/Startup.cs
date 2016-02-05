@@ -1,4 +1,8 @@
-﻿using System.Web.Http;
+﻿using System.Reflection;
+using System.Web.Http;
+using Ninject;
+using Ninject.Web.Common.OwinHost;
+using Ninject.Web.WebApi.OwinHost;
 using Owin;
 
 namespace ExtendedApi
@@ -11,13 +15,17 @@ namespace ExtendedApi
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "{controller}",
-                defaults: new { controller = "Home" }
-            );
 
-            app.UseWebApi(config);
+            app.UseNinjectMiddleware(CreateKernel)
+                .UseNinjectWebApi(config);
+            //app.UseWebApi(config);
+        }
+
+        private static StandardKernel CreateKernel()
+        {
+            var kernel = new StandardKernel();
+            kernel.Load(new ApiNinjectModule()); // Assembly.GetExecutingAssembly()
+            return kernel;
         }
     }
 }
