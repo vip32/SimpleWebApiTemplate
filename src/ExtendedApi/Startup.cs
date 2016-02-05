@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Reflection;
 using System.Web.Http;
 using Ninject;
@@ -9,6 +11,7 @@ using Serilog;
 using Serilog.Enrichers;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.IOFile;
+using Serilog.Sinks.MSSqlServer;
 
 namespace ExtendedApi
 {
@@ -41,9 +44,21 @@ namespace ExtendedApi
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.LiterateConsole(outputTemplate: "{Timestamp:u} [{Level}] {SourceContext}:: {Message}{NewLine}{Exception}")
-                .WriteTo.File("c:\\tmp\\ExtendedApi_Log.txt", outputTemplate: "{Timestamp:u} [{Level}] {SourceContext}:: {Message}{NewLine}{Exception}")
+                .WriteTo.Trace()
+                .WriteTo.LiterateConsole(
+                    outputTemplate: "{Timestamp:u} [{Level}] {SourceContext}:: {Message}{NewLine}{Exception}")
+                .WriteTo.File("c:\\tmp\\ExtendedApi_Log.txt",
+                    outputTemplate: "{Timestamp:u} [{Level}] {SourceContext}:: {Message}{NewLine}{Exception}")
                 .WriteTo.Sink(new FileSink(@"c:\\tmp\\ExtendedApi_Log.json", new JsonFormatter(false, null, true), null))
+                .WriteTo.MSSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=LogTest;Integrated Security=True;",
+                    "Logs", autoCreateSqlTable: true, columnOptions: new ColumnOptions
+                    {
+                        AdditionalDataColumns = new Collection<DataColumn>
+                        {
+                            new DataColumn {DataType = typeof (string), ColumnName = "CorrelationId"},
+                            new DataColumn {DataType = typeof (string), ColumnName = "SourceContext"},
+                        }
+                    })
                 .Enrich.WithProperty("App", "ExtendedApi")
                 .Enrich.With(new ThreadIdEnricher(), new MachineNameEnricher())
                 .Enrich.FromLogContext()

@@ -48,11 +48,7 @@ namespace ExtendedApi
                     using (LogContext.PushProperty("Headers", request.Headers.ToDictionary(h => h.Key, h => string.Join(", ", h.Value))))
                     using (LogContext.PushProperty("RequestBody", Encoding.UTF8.GetString(requestMessage), true))
                     {
-                        Log.Debug(
-                            "{Type} [{Method}] {Uri}",
-                            "REQUEST",
-                            request.Method,
-                            request.RequestUri);
+                        Log.Debug("{Type} [{Method}] {Uri}", "REQUEST", request.Method, request.RequestUri);
                     }
                 });
             }
@@ -72,8 +68,7 @@ namespace ExtendedApi
                     using (LogContext.PushProperty("Headers", response.Headers.ToDictionary(h => h.Key, h => string.Join(", ", h.Value))))
                     using (LogContext.PushProperty("ResponseBody", Encoding.UTF8.GetString(responseMessage), true))
                     {
-                        Log.Debug(
-                            "{Type} [{Method}] {Uri} -> {Time:0}ms {HttpStatus} {Reason}",
+                        Log.Debug("{Type} [{Method}] {Uri} -> {Time:0}ms {HttpStatus} {Reason}",
                             "RESPONSE",
                             request.Method,
                             request.RequestUri,
