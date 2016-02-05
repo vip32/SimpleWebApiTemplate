@@ -1,5 +1,4 @@
-﻿using ExtendedApi.Providers;
-using Ninject.Modules;
+﻿using Ninject.Modules;
 using Serilog;
 
 namespace ExtendedApi

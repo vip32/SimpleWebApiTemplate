@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
-using ExtendedApi.Providers;
 using Serilog;
 
-namespace ExtendedApi.Controllers
+namespace ExtendedApi
 {
     [Route("")]
     public class HomeController : ApiController

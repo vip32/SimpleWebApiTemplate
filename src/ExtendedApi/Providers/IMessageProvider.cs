@@ -1,4 +1,4 @@
-﻿namespace ExtendedApi.Providers
+﻿namespace ExtendedApi
 {
     public interface IMessageProvider
     {
