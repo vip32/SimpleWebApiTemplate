@@ -10,7 +10,7 @@ namespace SimpleApi.Controllers
         {
             return new ResponseMessageResult(new HttpResponseMessage
             {
-                Content = new StringContent("Welcome to my WebApi")
+                Content = new StringContent("Welcome to the Simple WebApi")
             });
         }
     }
