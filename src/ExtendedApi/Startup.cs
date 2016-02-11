@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Http;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
-using Serilog;
-using Serilog.Enrichers;
-using Serilog.Formatting.Json;
-using Serilog.Sinks.IOFile;
-using Serilog.Sinks.MSSqlServer;
 
 namespace ExtendedApi
 {
@@ -19,16 +11,12 @@ namespace ExtendedApi
     {
         public void Configuration(IAppBuilder app)
         {
-            CreateLogger();
             var config = new HttpConfiguration();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            var contextLogger = Log.Logger.ForContext<Startup>();
-            contextLogger.Debug("starting webapi {DomainId}", AppDomain.CurrentDomain.Id);
-            config.MessageHandlers.Add(new RequestResponseLoggingHandler());
-
+            // Web API Ninject setup
             app.UseNinjectMiddleware(CreateKernel)
                 .UseNinjectWebApi(config);
         }
@@ -38,31 +26,6 @@ namespace ExtendedApi
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
             return kernel;
-        }
-
-        private static void CreateLogger()
-        {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .WriteTo.Trace()
-                .WriteTo.LiterateConsole(
-                    outputTemplate: "{Timestamp:u} [{Level}] {SourceContext}:: {Message}{NewLine}{Exception}")
-                .WriteTo.File("c:\\tmp\\ExtendedApi_Log.txt",
-                    outputTemplate: "{Timestamp:u} [{Level}] {SourceContext}:: {Message}{NewLine}{Exception}")
-                .WriteTo.Sink(new FileSink(@"c:\\tmp\\ExtendedApi_Log.json", new JsonFormatter(false, null, true), null))
-                .WriteTo.MSSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=LogTest;Integrated Security=True;",
-                    "Logs", autoCreateSqlTable: true, columnOptions: new ColumnOptions
-                    {
-                        AdditionalDataColumns = new Collection<DataColumn>
-                        {
-                            new DataColumn {DataType = typeof (string), ColumnName = "CorrelationId"},
-                            new DataColumn {DataType = typeof (string), ColumnName = "SourceContext"},
-                        }
-                    })
-                .Enrich.WithProperty("App", "ExtendedApi")
-                .Enrich.With(new ThreadIdEnricher(), new MachineNameEnricher())
-                .Enrich.FromLogContext()
-                .CreateLogger();
         }
     }
 }
